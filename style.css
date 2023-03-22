@@ -1,3 +1,4 @@
+
 h1 {
     text-align: center;
     
@@ -23,8 +24,7 @@ h2 {
     
     grid-template-columns: repeat(16, 30px);
     grid-template-rows: repeat(16, 30px);
-    /* grid-auto-rows: 15px;
-    grid-auto-columns: minmax(30px, auto); */
+
     
 
     border-style: solid;
@@ -38,6 +38,15 @@ h2 {
 
 .container > *:hover {
     transform: scale(1.25);
-    background-color: black;
+    border-color: black;
 }
 
+.hoverred {
+    background-color: red;
+}
+
+.rubber {
+    margin: 50px;
+    min-width: 40px;
+    height: 40px;
+}

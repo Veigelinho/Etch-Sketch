@@ -7,6 +7,11 @@ body.append(rubberButton)
 rubberButton.classList.add("rubber")
 rubberButton.innerText = "RUBBER"
 
+const drawButton = document.createElement("button")
+body.append(drawButton)
+drawButton.classList.add("draw")
+drawButton.innerText = "DRAW"
+
 for (let i = 1; i < 257; i++) {
     let thisContainerDiv = document.createElement("div")
     // thisContainerDiv.innerText = `${i}`
@@ -16,27 +21,48 @@ for (let i = 1; i < 257; i++) {
     // console.log(thisContainerDiv.getAttribute('class'))
 }
 
-containerDiv.addEventListener("mouseover", eventListenerAddRed)
-document.addEventListener("onclick", removeRedEvent)
+containerDiv.onmouseover = (e) => classAddRed(e)
 
-function eventListenerAddRed(e) {
+function rubber (e) {
+    if (e.target.matches("div.container > *")) {
+        e.target.removeEventListener('onmouseover', classAddRed)
+        e.target.classList.remove("hoverred")
+        e.target.classList.add("hoverwhite")
+        
+    }
+}
+
+function classAddRed(e) {
     if (e.target.matches("div.container > *")) {
         e.target.classList.add("hoverred")
-        console.log(e.target.classList)
+        if (e.target.classList.contains("hoverwhite")) {
+            e.target.classList.remove("hoverwhite")
+        }
+        
+        
     }
 }
 
-
-
-function removeRedEvent(e) {
-    if (e.target.matches("button.rubber")) {
-        containerDiv.removeEventListener("mouseover", eventListenerAddRed)
-    }
+rubberButton.onclick = () => {
+    containerDiv.removeEventListener('mouseover', classAddRed)
+    containerDiv.addEventListener('mouseover', rubber)
 }
 
-// var function  
+drawButton.onclick = () => {
+    containerDiv.classList.remove('hoverwhite')
+    containerDiv.removeEventListener('mouseover', rubber)
+    containerDiv.addEventListener('mouseover', classAddRed)
+    
+}
 
-// etchGridDiv.setAttribute('class', 'gridbox')
-// etchGridDiv.innerText = "testing2"
+// function removeRedEvent(e) {
+//     if (e.target.matches("button")) {
+//         console.log(e)
+        // let gridelms = document.querySelectorAll("div.container > *")
+        // for (elements of gridelms) {
+        //     gridelms.classList.remove("hoverred")
+        // }
+        // containerDiv.removeEventListener("mouseover", eventListenerAddRed)
+//     }
+// }
 
-// body.append(etchGridDiv)

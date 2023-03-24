@@ -1,59 +1,104 @@
-const body = document.body
-// const etchGridDiv = 
-const containerDiv = document.querySelector('.container')
+const grid = document.querySelector('.grid')
+const main = document.querySelector('main')
+
+for (let i = 1; i < 257; i++) {
+    let singleGridElm = document.createElement("div")
+    singleGridElm.id = `gridItem${i}`
+    singleGridElm.addEventListener('mouseover', changeColor);
+    singleGridElm.addEventListener("mousedown" , changeColor)
+    grid.append(singleGridElm)
+
+}
+
+const colorPicker = document.createElement("input")
+main.append(colorPicker)
+colorPicker.id = "chosencolor"
+colorPicker.type = "color"
+colorPicker.value = "#333333" 
+console.log(colorPicker.type)
 
 const rubberButton = document.createElement("button")
-body.append(rubberButton)
+main.append(rubberButton)
 rubberButton.classList.add("rubber")
 rubberButton.innerText = "RUBBER"
 
+
 const drawButton = document.createElement("button")
-body.append(drawButton)
+main.append(drawButton)
 drawButton.classList.add("draw")
 drawButton.innerText = "DRAW"
 
-for (let i = 1; i < 257; i++) {
-    let thisContainerDiv = document.createElement("div")
-    // thisContainerDiv.innerText = `${i}`
-    // thisContainerDiv.innerText = `x`
-    thisContainerDiv.setAttribute('class', `gridItem${i}`)
-    containerDiv.append(thisContainerDiv)
-    // console.log(thisContainerDiv.getAttribute('class'))
+main.append(colorPicker, drawButton, rubberButton)
+
+const DEFAULT_COLOR = '#333333';
+const DEFAULT_MODE = 'color';
+
+var currentColor = DEFAULT_COLOR;
+var currentMode = DEFAULT_MODE;
+
+function setCurrentColor(newColor) {
+    currentColor = newColor;
+
 }
 
-containerDiv.onmouseover = (e) => classAddRed(e)
+function setCurrentMode(newMode) {
+    currentMode = newMode;
 
-function rubber (e) {
-    if (e.target.matches("div.container > *")) {
-        e.target.removeEventListener('onmouseover', classAddRed)
-        e.target.classList.remove("hoverred")
-        e.target.classList.add("hoverwhite")
+}
+
+const body = document.body
+
+
+
+
+
+colorPicker.oninput = (e) => setCurrentColor(e.target.value)
+
+
+
+
+
+
+
+function changeColor(e) {
+    console.log(e.target.style)
+    e.target.style.backGroundColor = currentColor;
+    console.log(e.target.style.backGroundColor)
+}
+
+// containerDiv.onmouseover = (e) => classAddRed(e)
+
+// function rubber (e) {
+//     if (e.target.matches("div.container > *")) {
+//         e.target.removeEventListener('onmouseover', classAddRed)
+//         e.target.classList.remove("hoverred")
+//         e.target.classList.add("hoverwhite")
         
-    }
-}
+//     }
+// }
 
-function classAddRed(e) {
-    if (e.target.matches("div.container > *")) {
-        e.target.classList.add("hoverred")
-        if (e.target.classList.contains("hoverwhite")) {
-            e.target.classList.remove("hoverwhite")
-        }
+// function classAddRed(e) {
+//     if (e.target.matches("div.container > *")) {
+//         e.target.classList.add("hoverred")
+//         if (e.target.classList.contains("hoverwhite")) {
+//             e.target.classList.remove("hoverwhite")
+//         }
         
         
-    }
-}
+//     }
+// }
 
-rubberButton.onclick = () => {
-    containerDiv.removeEventListener('mouseover', classAddRed)
-    containerDiv.addEventListener('mouseover', rubber)
-}
+// rubberButton.onclick = () => {
+//     grid.removeEventListener('mouseover', classAddRed)
+//     grid.addEventListener('mouseover', rubber)
+// }
 
-drawButton.onclick = () => {
-    containerDiv.classList.remove('hoverwhite')
-    containerDiv.removeEventListener('mouseover', rubber)
-    containerDiv.addEventListener('mouseover', classAddRed)
+// drawButton.onclick = () => {
+//     grid.classList.remove('hoverwhite')
+//     grid.removeEventListener('mouseover', rubber)
+//     grid.addEventListener('mouseover', classAddRed)
     
-}
+// }
 
 // function removeRedEvent(e) {
 //     if (e.target.matches("button")) {

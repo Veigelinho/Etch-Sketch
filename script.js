@@ -1,34 +1,42 @@
 const grid = document.querySelector('.grid')
-const main = document.querySelector('main')
-
-for (let i = 1; i < 257; i++) {
-    let singleGridElm = document.createElement("div")
-    singleGridElm.id = `gridItem${i}`
-    singleGridElm.addEventListener('mouseover', changeColor);
-    singleGridElm.addEventListener("mousedown" , changeColor)
-    grid.append(singleGridElm)
-
-}
+const leftBar = document.querySelector('.leftbar')
+const rightBar = document.querySelector('.rightbar')
 
 const colorPicker = document.createElement("input")
-main.append(colorPicker)
 colorPicker.id = "chosencolor"
 colorPicker.type = "color"
 colorPicker.value = "#333333" 
 console.log(colorPicker.type)
 
 const rubberButton = document.createElement("button")
-main.append(rubberButton)
 rubberButton.classList.add("rubber")
 rubberButton.innerText = "RUBBER"
 
 
 const drawButton = document.createElement("button")
-main.append(drawButton)
 drawButton.classList.add("draw")
 drawButton.innerText = "DRAW"
 
-main.append(colorPicker, drawButton, rubberButton)
+const rainbowButton = document.createElement('button')
+rainbowButton.innerText = "RAINBOW"
+
+const shadesButton = document.createElement('button')
+shadesButton.innerText = '50 SHADES'
+
+
+for (let i = 1; i < 257; i++) {
+    const singleGridElm = document.createElement("div")
+    singleGridElm.classList.add('grid-elm')
+    singleGridElm.addEventListener('mouseover', changeColor);
+    singleGridElm.addEventListener('mousedown', changeColor)
+    grid.appendChild(singleGridElm)
+
+}
+
+leftBar.append(colorPicker, drawButton, rainbowButton)
+rightBar.append(rubberButton, shadesButton)
+
+
 
 const DEFAULT_COLOR = '#333333';
 const DEFAULT_MODE = 'color';
@@ -38,12 +46,10 @@ var currentMode = DEFAULT_MODE;
 
 function setCurrentColor(newColor) {
     currentColor = newColor;
-
 }
 
 function setCurrentMode(newMode) {
     currentMode = newMode;
-
 }
 
 const body = document.body
@@ -53,7 +59,9 @@ const body = document.body
 
 
 colorPicker.oninput = (e) => setCurrentColor(e.target.value)
-
+drawButton.onclick = () => setCurrentMode('color')
+rubberButton.onclick = () => setCurrentMode('eraser')
+rainbowButton.onclick = () => setCurrentMode('rainbow')
 
 
 
@@ -61,9 +69,27 @@ colorPicker.oninput = (e) => setCurrentColor(e.target.value)
 
 
 function changeColor(e) {
-    console.log(e.target.style)
-    e.target.style.backGroundColor = currentColor;
-    console.log(e.target.style.backGroundColor)
+    if (currentMode == 'color') {
+        e.target.style.backgroundColor = currentColor;
+        console.log(e.target.style.backroundColor)
+        }
+
+    else if (currentMode == 'eraser') {
+        e.target.style.backgroundColor = 'white'
+    }
+
+    else if (currentMode == 'rainbow') {
+        const randomRed = Math.floor(Math.random() *256);
+        const randomGreen = Math.floor(Math.random() *256);
+        const randomBlue = Math.floor(Math.random() *256);
+
+        e.target.style.backgroundColor = `rgb(${randomRed}, ${randomGreen}, ${randomBlue})`
+    }
+
+    else if (currentMode == 'shades') {
+        e.target.style.backgroundColor = `currentColor`
+        const opacity = Math.floor(Math.random() * 256);
+    }
 }
 
 // containerDiv.onmouseover = (e) => classAddRed(e)

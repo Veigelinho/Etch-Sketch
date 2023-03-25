@@ -30,8 +30,17 @@ h2 {
 
 }
 
+main {
+    margin-top: 100px;
+    display: flex;
+}
+
+.leftbar {
+    display: flex;
+    flex-direction: column;
+}
+
 .grid {
-    margin: 100px 0px 50px;
     display: grid;
     
     width: 500px;
@@ -46,8 +55,6 @@ h2 {
     border-radius: 2px;
 }
 
-
-
 .grid > *:hover {
     transform: scale(1.25);
     border-color: black;
@@ -55,22 +62,24 @@ h2 {
     border-radius: 1px;
 }
 
-.hoverred {
+
+
+/* .hoverred {
     background-color: red;
 }
 
 .hoverwhite {
     background-color: white;
-}
+} */
 
 button {
     margin: 50px;
     min-width: 80px;
-    height: 50px;
+    height: 30px;
     background-color: white;
     border-style: groove;
     border-width: 1px;
-    border-radius: 25px;
+    border-radius: 5px;
 }
 
 

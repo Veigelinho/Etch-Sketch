@@ -37,8 +37,7 @@ leftBar.append(colorPicker, drawButton, rainbowButton)
 rightBar.append(rubberButton, shadesButton)
 
 
-
-const DEFAULT_COLOR = '#333333';
+const DEFAULT_COLOR = '#333333'; 
 const DEFAULT_MODE = 'color';
 
 var currentColor = DEFAULT_COLOR;
@@ -62,7 +61,7 @@ colorPicker.oninput = (e) => setCurrentColor(e.target.value)
 drawButton.onclick = () => setCurrentMode('color')
 rubberButton.onclick = () => setCurrentMode('eraser')
 rainbowButton.onclick = () => setCurrentMode('rainbow')
-
+shadesButton.onclick = () => setCurrentMode('shades')
 
 
 
@@ -87,10 +86,15 @@ function changeColor(e) {
     }
 
     else if (currentMode == 'shades') {
-        e.target.style.backgroundColor = `currentColor`
-        const opacity = Math.floor(Math.random() * 256);
+        const opacity = Math.floor(Math.random() * 256).toString(16);
+        const currentColorString = currentColor.slice(1)
+        console.log(currentColorString)
+       e.target.style.backgroundColor = `${currentColor}${opacity}`
+
     }
 }
+
+
 
 // containerDiv.onmouseover = (e) => classAddRed(e)
 

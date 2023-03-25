@@ -35,6 +35,7 @@ main {
     display: flex;
 }
 
+.rightbar,
 .leftbar {
     display: flex;
     flex-direction: column;

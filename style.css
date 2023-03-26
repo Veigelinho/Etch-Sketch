@@ -1,5 +1,6 @@
 :root {
     --testcolor: blue;
+    --anotherTestColor: red;
 }
 
 body {
@@ -25,9 +26,10 @@ h1 {
 }
 
 h2 {
+    font-size: 14px;
     text-align: center;
     margin: 0 0 20px 0;
-
+    
 }
 
 main {
@@ -35,18 +37,16 @@ main {
     display: flex;
 }
 
-.rightbar,
-.leftbar {
-    display: flex;
-    flex-direction: column;
-}
+
+
 
 .grid {
     display: grid;
     
     width: 500px;
     height: 500px;
-    
+    margin: 0 20px;
+
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
 
@@ -61,38 +61,32 @@ main {
     border-color: black;
     border-style: groove;
     border-radius: 1px;
+    
 }
 
 
 
-/* .hoverred {
-    background-color: red;
-}
 
-.hoverwhite {
-    background-color: white;
-} */
 
 button {
-    margin: 50px;
-    min-width: 80px;
+    width: 90px;
     height: 30px;
     background-color: white;
     border-style: groove;
     border-width: 1px;
     border-radius: 5px;
+
 }
 
 
 
 input[type="color"] {
     -webkit-appearance: none;
-    margin: 50px;
     width: 50px;
     height: 50px;
     border: none;
     background-color: white;
-    
+    align-self: center;
 }
 
 button:hover,
@@ -110,3 +104,62 @@ input[type="color"]::-webkit-color-swatch {
 	border-radius: 50px;
     border: none;
 }
+
+
+.rightbar,
+.leftbar {
+    display: grid;
+    justify-content:  center;
+    width: 100px;
+}
+
+.rightbar > *,
+.leftbar > * {
+    justify-self: center;
+}
+
+.leftbar {
+    grid-template-rows: repeat(1fr);
+    align-content: space-around;
+}
+
+.rightbar {
+    grid-template-rows: 350px 1fr;
+    /* row-gap: 20px; */
+    padding: 10px 0px;
+    align-content: space-around;
+}
+
+/* gridsize */
+
+
+.sizepickerslider {
+    height: auto;
+    width: auto;
+    display: grid;
+    grid-template-rows: 20px 1fr 20px;
+    gap: 5px;
+    /* grid-template-columns: 50px; */
+    /* justify-content: center; */
+    /* width: 50px; */
+}
+
+.scale {
+    
+}
+
+
+.sizepickerslider * {
+    justify-self: center;
+}
+
+#gridsizepicker {
+    -webkit-appearance: slider-vertical;
+}
+
+
+
+#gridsizepicker::-webkit-slider-thumb {
+    background: red;
+}
+

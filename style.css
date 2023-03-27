@@ -45,7 +45,7 @@ main {
     
     width: 500px;
     height: 500px;
-    margin: 0 20px;
+    margin: 0 20px 0 35px;
 
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(16, 1fr);
@@ -57,11 +57,7 @@ main {
 }
 
 .grid > *:hover {
-    transform: scale(1.25);
-    border-color: black;
-    border-style: groove;
-    border-radius: 1px;
-    
+    transform: scale(1.05);    
 }
 
 
@@ -75,9 +71,16 @@ button {
     border-style: groove;
     border-width: 1px;
     border-radius: 5px;
-
+    background-color: rgba(193, 202, 135, 0.6);
+    border-color: rgba(193, 202, 135, 0.6);
+    color: black;
 }
 
+button.active {
+    background-color: black;
+    border-color: rgba(20, 20, 20, 0.5);
+    color: white;
+}
 
 
 input[type="color"] {

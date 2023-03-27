@@ -2,16 +2,24 @@ const grid = document.querySelector('.grid')
 const leftBar = document.querySelector('.leftbar')
 const rightBar = document.querySelector('.rightbar')
 
+const topScale = document.getElementById('topscale')
+topScale.innerText = `${document.querySelector('#gridsizepicker').max}x${document.querySelector('#gridsizepicker').max}`
+const bottomScale = document.getElementById('bottomscale')
+bottomScale.innerText = `${document.querySelector('#gridsizepicker').min}x${document.querySelector('#gridsizepicker').min}`
+
 const colorPicker = document.createElement("input")
 colorPicker.id = "chosencolor"
 colorPicker.type = "color"
 colorPicker.value = "#333333" 
-console.log(colorPicker.type)
+
 
 const rubberButton = document.createElement("button")
 rubberButton.classList.add("rubber")
 rubberButton.innerText = "RUBBER"
 
+const clearButton = document.createElement('button')
+clearButton.classList.add('clear')
+clearButton.innerText = 'CLEAR'
 
 const drawButton = document.createElement("button")
 drawButton.classList.add("draw")
@@ -27,16 +35,9 @@ const sizePicker = document.getElementById('gridsizepicker')
 
 
 
-for (let i = 1; i < 257; i++) {
-    const singleGridElm = document.createElement("div")
-    singleGridElm.classList.add('grid-elm')
-    singleGridElm.addEventListener('mouseover', changeColor);
-    singleGridElm.addEventListener('mousedown', changeColor)
-    grid.appendChild(singleGridElm)
 
-}
 
-leftBar.append(drawButton, rainbowButton, shadesButton, rubberButton)
+leftBar.append(drawButton, rainbowButton, shadesButton, rubberButton, clearButton)
 rightBar.append(colorPicker)
 
 
@@ -53,6 +54,7 @@ function setCurrentColor(newColor) {
 }
 
 function setCurrentMode(newMode) {
+    activeButton(newMode);
     currentMode = newMode;
 }
 
@@ -71,21 +73,39 @@ drawButton.onclick = () => setCurrentMode('color')
 rubberButton.onclick = () => setCurrentMode('rubber')
 rainbowButton.onclick = () => setCurrentMode('rainbow')
 shadesButton.onclick = () => setCurrentMode('shades')
-sizePicker.oninput = (e) => createGrid(e)
+sizePicker.onchange = (e) => createGrid(e.target.value)
+clearButton.onclick = () => reloadGrid()
 
 
+
+function reloadGrid() {
+    createGrid(currentSize)
+}
 
 function createGrid (size) {
+    setCurrentSize(size);
+    
     grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`
     grid.style.gridTemplateRows = `repeat(${size}, 1fr)`
+
+    for (let i = 1; i < size * size; i++) {
+        const singleGridElm = document.createElement("div")
+        singleGridElm.classList.add('grid-elm')
+        singleGridElm.addEventListener('mouseover', changeColor);
+        singleGridElm.addEventListener('mousedown', changeColor)
+        grid.appendChild(singleGridElm)
+    
+    }
+
 }
 
 
 function changeColor(e) {
     if (currentMode == 'color') {
         e.target.style.backgroundColor = currentColor;
-        console.log(e.target.style.backroundColor)
-        }
+        
+        
+    }
 
     else if (currentMode == 'rubber') {
         e.target.style.backgroundColor = 'white'
@@ -107,4 +127,40 @@ function changeColor(e) {
 }
 
 
+function activeButton (newMode) {
+    if (currentMode === 'color') {
+        drawButton.classList.remove('active')
+    }
 
+        else if (currentMode === 'rainbow')  {
+            rainbowButton.classList.remove('active')
+        }
+        
+        else if (currentMode === 'shades')  {
+            shadesButton.classList.remove('active')
+        }
+
+        else if (currentMode === 'rubber')  {
+            rubberButton.classList.remove('active')
+        }
+
+    if (newMode === 'color') {
+        drawButton.classList.add('active')
+    }
+
+        else if (newMode === 'rainbow')  {
+            rainbowButton.classList.add('active')
+        }
+        
+        else if (newMode === 'shades')  {
+            shadesButton.classList.add('active')
+        }
+
+        else if (newMode === 'rubber')  {
+            rubberButton.classList.add('active')
+        }
+}
+
+window.onload = () => {
+    createGrid(DEFAULT_SIZE)
+} 

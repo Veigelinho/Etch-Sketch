@@ -34,6 +34,7 @@ shadesButton.innerText = '50 SHADES'
 
 const sizePicker = document.getElementById('gridsizepicker')
 
+const gridSizeValue = document.getElementById('gridsizevalue')
 
 
 
@@ -75,9 +76,15 @@ rubberButton.onclick = () => setCurrentMode('rubber')
 rainbowButton.onclick = () => setCurrentMode('rainbow')
 shadesButton.onclick = () => setCurrentMode('shades')
 sizePicker.onchange = (e) => changeGridSize(e.target.value)
+sizePicker.onmousemove = () => updateGridValue()
 clearButton.onclick = () => reloadGrid()
 
 
+
+
+function updateGridValue () {
+    gridSizeValue.innerText = `${sizePicker.value}     x     ${sizePicker.value}`
+}
 
 function reloadGrid() {
     clearGrid()
@@ -178,4 +185,5 @@ function activeButton (newMode) {
 
 window.onload = () => {
     createGrid(DEFAULT_SIZE)
+    updateGridValue()
 } 

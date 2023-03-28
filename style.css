@@ -32,8 +32,14 @@ h2 {
     
 }
 
+#gridsizevalue {
+    margin: 35px 0px 20px;
+    text-align: center;
+    font-size: 50px;
+}
+
 main {
-    margin-top: 100px;
+    
     display: flex;
 }
 
@@ -71,8 +77,8 @@ button {
     border-style: groove;
     border-width: 1px;
     border-radius: 5px;
-    background-color: rgba(193, 202, 135, 0.6);
-    border-color: rgba(193, 202, 135, 0.6);
+    background-color: rgba(161, 102, 206, 0.3);
+    border-color: rgba(161, 102, 206, 0.3);
     color: black;
 }
 

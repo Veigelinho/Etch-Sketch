@@ -1,3 +1,8 @@
+/* Some useful / pretty font recommendations are highly appreciated. */
+
+
+
+
 :root {
     --testcolor: blue;
     --anotherTestColor: red;
@@ -8,16 +13,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
-body > * {
-    justify-content:  center;
-}
+/* Header */
 
 h1 {
     text-align: center;
     margin: 0;
-    
     font-family: Ubuntu;
     font-size: 70px;
     background-image: linear-gradient(to left, indigo, orange);
@@ -32,19 +35,67 @@ h2 {
     
 }
 
+
+
+/* Displaying gridsize */
+
 #gridsizevalue {
     margin: 35px 0px 20px;
     text-align: center;
     font-size: 50px;
 }
 
+
+
+/* Etch-A-Sketch */
+
 main {
-    
     display: flex;
 }
 
 
+.rightbar,
+.leftbar {
+    display: grid;
+    justify-content:  center;
+    width: 100px;
+}
 
+.rightbar > *,
+.leftbar > * {
+    justify-self: center;
+}
+
+
+
+/* Left side with buttons */
+
+.leftbar {
+    grid-template-rows: repeat(1fr);
+    align-content: space-around;
+}
+
+button {
+    width: 90px;
+    height: 30px;
+    background-color: white;
+    border-style: groove;
+    border-width: 1px;
+    border-radius: 5px;
+    background-color: rgba(161, 102, 206, 0.3);
+    border-color: rgba(161, 102, 206, 0.3);
+    color: black;
+}
+
+button.active {
+    background-color: black;
+    border-color: rgba(20, 20, 20, 0.5);
+    color: white;
+}
+
+
+
+/* The grid */
 
 .grid {
     display: grid;
@@ -68,26 +119,47 @@ main {
 
 
 
+/* Right side with Sizeslider and Colorpicker */
 
-
-button {
-    width: 90px;
-    height: 30px;
-    background-color: white;
-    border-style: groove;
-    border-width: 1px;
-    border-radius: 5px;
-    background-color: rgba(161, 102, 206, 0.3);
-    border-color: rgba(161, 102, 206, 0.3);
-    color: black;
+.rightbar {
+    grid-template-rows: 1fr 80px;
+    padding: 0px 0px;
+    align-content: space-around;
 }
 
-button.active {
-    background-color: black;
-    border-color: rgba(20, 20, 20, 0.5);
-    color: white;
+.sizepickerslider {
+    height: auto;
+    width: auto;
+    display: grid;
+    grid-template-rows: 40px 1fr 40px;
+    gap: 10px;
 }
 
+.sizepickerslider * {
+    justify-self: center;
+}
+
+#gridsizeslider {
+    -webkit-appearance: slider-vertical;
+    margin: 20px 0px;
+}
+
+#gridsizeslider::-webkit-slider-thumb {
+    background: red;
+}
+
+#topofscale,
+#bottomofscale {
+    display: flex;
+    height: 40px;
+    width: 60px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+/* Colorpicker */
 
 input[type="color"] {
     -webkit-appearance: none;
@@ -113,62 +185,3 @@ input[type="color"]::-webkit-color-swatch {
 	border-radius: 50px;
     border: none;
 }
-
-
-.rightbar,
-.leftbar {
-    display: grid;
-    justify-content:  center;
-    width: 100px;
-}
-
-.rightbar > *,
-.leftbar > * {
-    justify-self: center;
-}
-
-.leftbar {
-    grid-template-rows: repeat(1fr);
-    align-content: space-around;
-}
-
-.rightbar {
-    grid-template-rows: 350px 1fr;
-    /* row-gap: 20px; */
-    padding: 10px 0px;
-    align-content: space-around;
-}
-
-/* gridsize */
-
-
-.sizepickerslider {
-    height: auto;
-    width: auto;
-    display: grid;
-    grid-template-rows: 20px 1fr 20px;
-    gap: 5px;
-    /* grid-template-columns: 50px; */
-    /* justify-content: center; */
-    /* width: 50px; */
-}
-
-.scale {
-    
-}
-
-
-.sizepickerslider * {
-    justify-self: center;
-}
-
-#gridsizepicker {
-    -webkit-appearance: slider-vertical;
-}
-
-
-
-#gridsizepicker::-webkit-slider-thumb {
-    background: red;
-}
-

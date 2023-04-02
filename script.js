@@ -1,26 +1,8 @@
-const grid = document.querySelector('.grid')
+// HTML
+
+const gridSizeValue = document.getElementById('gridsizevalue')
+
 const leftBar = document.querySelector('.leftbar')
-const rightBar = document.querySelector('.rightbar')
-const activeClass = document.querySelector('button.active')
-
-const topScale = document.getElementById('topscale')
-topScale.innerText = `${document.querySelector('#gridsizepicker').max}x${document.querySelector('#gridsizepicker').max}`
-const bottomScale = document.getElementById('bottomscale')
-bottomScale.innerText = `${document.querySelector('#gridsizepicker').min}x${document.querySelector('#gridsizepicker').min}`
-
-const colorPicker = document.createElement("input")
-colorPicker.id = "chosencolor"
-colorPicker.type = "color"
-colorPicker.value = "#333333" 
-
-
-const rubberButton = document.createElement("button")
-rubberButton.classList.add("rubber")
-rubberButton.innerText = "RUBBER"
-
-const clearButton = document.createElement('button')
-clearButton.classList.add('clear')
-clearButton.innerText = 'CLEAR'
 
 const drawButton = document.createElement("button")
 drawButton.classList.add("draw")
@@ -32,14 +14,40 @@ rainbowButton.innerText = "RAINBOW"
 const shadesButton = document.createElement('button')
 shadesButton.innerText = '50 SHADES'
 
-const sizePicker = document.getElementById('gridsizepicker')
+const rubberButton = document.createElement("button")
+rubberButton.classList.add("rubber")
+rubberButton.innerText = "RUBBER"
 
-const gridSizeValue = document.getElementById('gridsizevalue')
+const clearButton = document.createElement('button')
+clearButton.classList.add('clear')
+clearButton.innerText = 'CLEAR'
 
-
-
+const activeClass = document.querySelector('button.active')
 
 leftBar.append(drawButton, rainbowButton, shadesButton, rubberButton, clearButton)
+
+
+
+
+const grid = document.querySelector('.grid')
+
+
+
+const rightBar = document.querySelector('.rightbar')
+
+const topofScale = document.getElementById('topofscale')
+topofScale.innerText = `${document.querySelector('#gridsizeslider').max}x${document.querySelector('#gridsizeslider').max}`
+const sizeSlider = document.getElementById('gridsizeslider')
+const bottomofScale = document.getElementById('bottomofscale')
+bottomofScale.innerText = `${document.querySelector('#gridsizeslider').min}x${document.querySelector('#gridsizeslider').min}`
+
+
+const colorPicker = document.createElement("input")
+colorPicker.id = "chosencolor"
+colorPicker.type = "color"
+colorPicker.value = "#333333" 
+
+
 rightBar.append(colorPicker)
 
 
@@ -64,10 +72,6 @@ function setCurrentSize(newSize) {
     currentSize = newSize;
 }
 
-const body = document.body
-
-
-
 
 
 colorPicker.oninput = (e) => setCurrentColor(e.target.value), setCurrentMode('color')
@@ -75,16 +79,20 @@ drawButton.onclick = () => setCurrentMode('color')
 rubberButton.onclick = () => setCurrentMode('rubber')
 rainbowButton.onclick = () => setCurrentMode('rainbow')
 shadesButton.onclick = () => setCurrentMode('shades')
-sizePicker.onchange = (e) => changeGridSize(e.target.value)
-sizePicker.onmousemove = () => updateGridValue()
+
+sizeSlider.onchange = (e) => changeGridSize(e.target.value)
+sizeSlider.onmousemove = () => updateGridValue()
 clearButton.onclick = () => reloadGrid()
 
 
 
 
 function updateGridValue () {
-    gridSizeValue.innerText = `${sizePicker.value}     x     ${sizePicker.value}`
+    gridSizeValue.innerText = `${sizeSlider.value}     x     ${sizeSlider.value}`
 }
+
+function createGrid (size) {
+    setCurrentSize(size)
 
 function reloadGrid() {
     clearGrid()
@@ -101,8 +109,7 @@ function clearGrid() {
     grid.innerHTML = ''
 }
 
-function createGrid (size) {
-    setCurrentSize(size)
+
 
 
     grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`
@@ -167,7 +174,6 @@ function activeButton (newMode) {
 
     if (newMode === 'color') {
         drawButton.classList.add('active')
-        // activeClass.style.backgroundColor = `${currentColor}`;
     }
 
         else if (newMode === 'rainbow')  {

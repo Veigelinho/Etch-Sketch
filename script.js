@@ -91,9 +91,6 @@ function updateGridValue () {
     gridSizeValue.innerText = `${sizeSlider.value}     x     ${sizeSlider.value}`
 }
 
-function createGrid (size) {
-    setCurrentSize(size)
-
 function reloadGrid() {
     clearGrid()
     createGrid(currentSize)
@@ -109,7 +106,8 @@ function clearGrid() {
     grid.innerHTML = ''
 }
 
-
+function createGrid (size) {
+    setCurrentSize(size)
 
 
     grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`
